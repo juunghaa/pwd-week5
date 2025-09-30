@@ -61,3 +61,8 @@ describe('Restaurant routes', () => {
     expect(response.body.data.name).toBe(payload.name);
   });
 });
+const mongoose = require('mongoose');
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
