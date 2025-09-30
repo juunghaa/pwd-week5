@@ -2,28 +2,15 @@
 const request = require('supertest');
 const createApp = require('../src/app');
 const restaurantService = require('../src/services/restaurants.service');
-const mongoose = require('mongoose');
-const { connectDB, closeDB } = require('../src/config/db');
 
+describe('Restaurant routes', () => {
   let app;
-
-  jest.setTimeout(20000); // 타임아웃 여유있게
-
-  beforeAll(async () => {
-    await connectDB(process.env.MONGODB_URI, process.env.DB_NAME);
-    app = createApp();
-  });
 
   beforeEach(() => {
     restaurantService.resetStore();
     app = createApp();
   });
 
-  afterAll(async () => {
-    await closeDB();
-  });
-
-describe('Restaurant routes', () => {
   test('GET /api/restaurants returns a list', async () => {
     const response = await request(app).get('/api/restaurants');
     expect(response.status).toBe(200);

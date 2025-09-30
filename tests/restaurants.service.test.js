@@ -1,21 +1,5 @@
 // tests/restaurants.service.test.js
 const restaurantService = require('../src/services/restaurants.service');
-const { connectDB } = require('../src/config/db');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-const mongoose = require('mongoose');
-
-let mongoServer;
-
-beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-  await connectDB(uri, 'testdb');
-});
-
-afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
 
 describe('RestaurantService', () => {
   afterEach(() => {
