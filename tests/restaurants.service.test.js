@@ -1,5 +1,10 @@
 // tests/restaurants.service.test.js
 const restaurantService = require('../src/services/restaurants.service');
+const { connectDB } = require('../src/config/db');
+beforeAll(async () => {
+  await connectDB(process.env.MONGO_URI, process.env.DB_NAME);
+  await restaurantService.resetStore();
+});
 
 describe('RestaurantService', () => {
   afterEach(() => {
