@@ -28,7 +28,7 @@ beforeAll(async () => {
   const uri = mongo.getUri();
   await mongoose.connect(uri);
   
-  console.log('✅ MongoDB Memory Server started');
+  console.log('MongoDB Memory Server started');
 });
 
 // 모든 테스트 종료 후: 정리
@@ -42,7 +42,7 @@ afterAll(async () => {
   }
   
   console.log('MongoDB Memory Server stopped');
-});
+}, 20000);
 
 // 각 테스트 후: 모든 데이터 삭제 (다음 테스트를 위해)
 afterEach(async () => {
@@ -52,8 +52,3 @@ afterEach(async () => {
   }
 });
 
-afterAll(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.connection.close();
-  await mongo.stop();
-});
